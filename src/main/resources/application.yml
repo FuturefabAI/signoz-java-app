@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    banner-mode: "off"
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    data-username: sa
+    data-password: sa
+    platform: org.hibernate.dialect.H2Dialect
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate.format_sql: true
+    show-sql: true
+
+# JMX
+#  management.endpoints.web.exposure.include=*
+#  management.endpoints.web.exposure.include=prometheus,health,info,metric
+#
+#  management.health.probes.enabled=true
+#  management.endpoint.health.show-details=always
+#  management.endpoint.prometheus.enabled=true
+management:
+  endpoints:
+    web:
+    exposure:
+      include:
+        - "*"
+        - "prometheus,health,info,metric"
+  health:
+    probes:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
+
+  metrics:
+    use-global-registry: true
+    web:
+      server:
+        request:
+          autotime:
+            enabled: true

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <GRPCLogClientAppender name="grpc-log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </GRPCLogClientAppender>
+        <RandomAccessFile name="fileAppender" fileName="/tmp/logs/log4j2/sgapp.log"
+                          immediateFlush="true" append="true">
+            <PatternLayout>
+                <Pattern>[%sw_ctx] [%p] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c:%L - %m%n</Pattern>
+            </PatternLayout>
+        </RandomAccessFile>
+    </Appenders>
+
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="grpc-log"/>
+        </Root>
+        <Logger name="fileLogger" level="info" additivity="false">
+            <AppenderRef ref="fileAppender"/>
+        </Logger>
+    </Loggers>
+</Configuration>
