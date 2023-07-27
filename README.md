@@ -42,7 +42,7 @@ mvn clean package
 
 ```shell
 # Set service name
-export OTEL_RESOURCE_ATTRIBUTES=service.name=sgapp
+export OTEL_RESOURCE_ATTRIBUTES="service.name=sgapp,service.namespace=default,development.environment=demo"
 # Set Signoz server address
 export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
 
